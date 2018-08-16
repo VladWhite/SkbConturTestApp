@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">TestSkbCalc</string>
+    <string name="plus">+</string>
+    <string name="dot">.</string>
+    <string name="mul">*</string>
+    <string name="div">/</string>
+    <string name="minus">-</string>
+    <string name="pow">^</string>
+    <string name="cancel">ce</string>
+    <string name="clear">c</string>
+    <string name="equals">=</string>
+    <string name="infinity">infinity</string>
+    <string name="empty"></string>
+    <string name="divideByZero">деление на ноль!</string>
+    <string name="clickError">BUTTON CLICK ERROR:</string>
+    <string name="dispayText">displayText</string>
+    <string name="wrongExpression">Неверное значение!</string>
+</resources>
