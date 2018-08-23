@@ -1,18 +1,18 @@
 package skb.belenkov.ru.testskbcalc.implementation
 
 import android.content.Context
-import com.squareup.duktape.DuktapeException
 import io.reactivex.Observable
-import mathjs.niltonvasques.com.mathjs.MathJS
 import skb.belenkov.ru.testskbcalc.R
 import skb.belenkov.ru.testskbcalc.interfaces.ICalculationProcessor
+import skb.belenkov.ru.testskbcalc.parser.Calculator
+import skb.belenkov.ru.testskbcalc.parser.ICalculator
 
-class CalculationProcessor(private val context: Context) : ICalculationProcessor {
+class CalculationProcessor(private val context: Context,
+                           private val calculator:ICalculator = Calculator()) : ICalculationProcessor {
 
     override fun getCalculationProcessor(operation: String, displayContent: String): Observable<String> {
         return Observable.create { subscriber ->
             run {
-                val math = MathJS()
                 when (operation) {
                     context.getString(R.string.plus), context.getString(R.string.mul), context.getString(R.string.div), context.getString(R.string.pow), context.getString(R.string.dot) -> {
                         if (displayContent.isNotEmpty()) {
@@ -42,17 +42,8 @@ class CalculationProcessor(private val context: Context) : ICalculationProcessor
                         subscriber.onNext(displayContent.substring(0, lenght - 1))
                     }
                     context.getString(R.string.equals) -> {
-                        var result: String
-                        try {
-                            result = math.eval(displayContent)
-                            if (result.equals(context.getString(R.string.infinity), true)) {
-                                subscriber.onNext(context.getString(R.string.divideByZero))
-                            }else{
-                                subscriber.onNext(result)
-                            }
-                        } catch (e: DuktapeException) {
-                            subscriber.onNext(context.getString(R.string.wrongExpression))
-                        }
+                        val result = calculator.calculate(displayContent)
+                        subscriber.onNext(result)
                     }
                     else -> {
                         subscriber.onNext(displayContent + operation)

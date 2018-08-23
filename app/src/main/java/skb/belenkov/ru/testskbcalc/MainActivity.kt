@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             run {
                 view.setOnClickListener {
                     val button = view as Button
-                    button.setOnTouchListener { view, event ->
+                    button.setOnTouchListener { _, event ->
                         if (event.action == MotionEvent.ACTION_UP) {
                             button.setBackgroundColor(getColor(R.color.colorLightBlue))
                         } else if (event.action == MotionEvent.ACTION_DOWN) {

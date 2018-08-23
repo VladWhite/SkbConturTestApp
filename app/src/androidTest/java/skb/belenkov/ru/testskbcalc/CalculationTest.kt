@@ -21,8 +21,8 @@ class CalculationTest {
     @Test
     fun calculationTest() {
         val appContext = InstrumentationRegistry.getTargetContext()
-        var expressionToCalculate = "10 + 66/ (12 - 6) + 45.6"
-        var calcProcessor: ICalculationProcessor = CalculationProcessor(appContext)
+        val expressionToCalculate = "10+66/(12-6)+45.6"
+        val calcProcessor: ICalculationProcessor = CalculationProcessor(appContext)
         calcProcessor.getCalculationProcessor("=", expressionToCalculate)
                 .test()
                 .assertValue("66.6")
